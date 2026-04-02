@@ -38,4 +38,20 @@ def add_records(role_auth,type,category,amount,datetime,description):
         db.add(record)
         db.commit()
 
-def update_records(role_auth,record_id,record_type,record_)
+def update_records(role_auth,record_id,amount,description):
+    if role_auth and record_id :
+        with SessionLocal() as db:
+            record=db.query(Records).filter(Records.record_id == record_id).first()
+            if amount is not None:
+                record.amount = amount
+            if description is not None:
+                record.description = description
+            
+            db.commit()
+
+def delete_record(role_auth,record_id):
+    if role_auth:
+        with SessionLocal() as db:
+            record=db.query(Records).filter(Records.record_id == record_id)
+            db.delete(record)
+            db.commit()
