@@ -1,8 +1,8 @@
-from repo.db import SessionLocal,base
+from repo.db import SessionLocal,Base
 from sqlalchemy import Column,Integer,String
 from sqlalchemy.exc import SQLAlchemyError
 
-class Users(base):
+class Users(Base):
     __tablename__ = "users"
     user_id = Column(String,primary_key=True,nullable=False)
     user_name = Column(String,nullable=False)

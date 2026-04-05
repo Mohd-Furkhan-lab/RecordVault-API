@@ -1,8 +1,8 @@
-from repo.db import SessionLocal,base
+from repo.db import SessionLocal,Base
 from sqlalchemy import Column,String,Integer,DateTime,Float,func
 from sqlalchemy.exc import SQLAlchemyError
 
-class Records(base):
+class Records(Base):
     __tablename__ = "records"
     record_id=Column(Integer,primary_key=True,autoincrement=True)
     record_type=Column(String,nullable=False)

@@ -5,13 +5,13 @@ import bcrypt
 
 def addUsers(is_admin,data):
     if is_admin:
-        id=uuid.uuid4()
+        id=str(uuid.uuid4())
         name = data.user_name
         email = data.user_email
         password = data.user_password
         role = data.user_role
         status = data.user_status
-        hash_password = bcrypt.hashpw(password,bcrypt.gensalt())
+        hash_password = bcrypt.hashpw(password.encode(),bcrypt.gensalt())
         res=add_user(id,name,email,hash_password,role,status)
         if res:
             return {'message':'added successfully'}
@@ -21,7 +21,7 @@ def addUsers(is_admin,data):
 def upateUsers(is_admin,data,userid):
     if is_admin:
         newRole = data.new_role
-        status = data.newStatus
+        status = data.new_status
         res = update_user(userid,newRole,status)
         if res:
             return {'message':'update seccessfully'}
@@ -51,10 +51,10 @@ def LoginUser(data):
     email = data.user_email
     password = data.user_password 
     storedpassword = getpassword(email)
-    is_authenticate = bcrypt.checkpw(password.encode(),storedpassword)
+    is_authenticate = bcrypt.checkpw(password.encode(),storedpassword[0])
     credentials = getroleandid(is_authenticate,email)
     role = credentials['role']
     userid = credentials['userid']
-    token =  create_token(userid,role)
+    token =  create_token(userid[0],role[0])
     return {'message':f'token = {token}'}
 
