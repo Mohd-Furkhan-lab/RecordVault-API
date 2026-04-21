@@ -1,4 +1,4 @@
-# Assessment API
+# RecordVault API
 
 A **FastAPI** service with **SQLAlchemy**, **JWT** authentication, **dependency injection** for route protection, and **Pydantic** models for request validation.
 
