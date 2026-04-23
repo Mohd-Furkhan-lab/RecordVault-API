@@ -8,6 +8,7 @@ load_dotenv()
 
 admin_name = os.getenv("admin_name")
 admin_password = os.getenv("admin_password")
+admin_email = os.getenv("admin_email")
 
 Base.metadata.create_all(bind=engine)
 
@@ -26,8 +27,9 @@ def createadmin():
         hash_password = bcrypt.hashpw(admin_password.encode(), bcrypt.gensalt())
 
         admin = Users(
+            user_id = 4,
             user_name=admin_name,
-            user_email="admin@recordvault.com",
+            user_email=admin_email,
             user_password=hash_password,
             role="admin",
             is_active=True
