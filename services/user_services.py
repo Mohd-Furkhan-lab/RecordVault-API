@@ -51,7 +51,7 @@ def LoginUser(data):
     email = data.user_email
     password = data.user_password 
     storedpassword = getpassword(email)
-    is_authenticate = bcrypt.checkpw(password.encode(),storedpassword[0])
+    is_authenticate = bcrypt.checkpw(password.encode(),storedpassword[0].encode())
     credentials = getroleandid(is_authenticate,email)
     role = credentials['role']
     userid = credentials['userid']
